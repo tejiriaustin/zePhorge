@@ -1,6 +1,5 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -10,11 +9,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
+var (
+	port,
+	repoName,
+	githubOrg,
+	githubPAT string
+)
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "zePhorge",
+	Use:   "pioneer",
 	Short: "A brief description of your application",
 	Long: `A longer description that spans multiple lines and likely contains
 examples and usage of using your application. For example:
@@ -46,6 +50,10 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+
+	rootCmd.PersistentFlags().StringVar(&repoName, "repo-name", "minecraft-server", "The name of the repository")
+	rootCmd.PersistentFlags().StringVar(&port, "port", "", "Port Server listens to")
+
+	rootCmd.MarkPersistentFlagRequired("repo-name")
+	rootCmd.MarkPersistentFlagRequired("port")
 }
-
-

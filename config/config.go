@@ -1,13 +1,15 @@
 package config
 
 import (
-	"github.com/joho/godotenv"
+	"github.com/tejiriaustin/pioneer/templating"
 )
 
 type Config struct {
-	DummyConf string `toml:"dummy_conf"`
+	Port     string            `json:"port"`
+	RepoName string            `json:"repoName"`
+	Files    *templating.Files `json:"-"`
 }
 
-func init() {
-	_ = godotenv.Load("service.toml")
+func New(files *templating.Files) *Config {
+	return &Config{Files: files}
 }
